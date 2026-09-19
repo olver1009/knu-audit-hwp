@@ -1,0 +1,11 @@
+# HWP templates, receipts, generated documents, and local test data may contain personal data.
+*.hwp
+*.hwpx
+*.pdf
+*.png
+*.jpg
+*.jpeg
+input*.json
+output/
+__pycache__/
+*.pyc
