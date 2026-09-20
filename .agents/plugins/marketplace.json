@@ -1,0 +1,16 @@
+{
+  "name": "knu-audit-hwp-marketplace",
+  "interface": {
+    "displayName": "KNU 감사 HWP 플러그인"
+  },
+  "plugins": [
+    {
+      "name": "knu-audit-hwp",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/olver1009/knu-audit-hwp.git",
+        "ref": "main"
+      }
+    }
+  ]
+}
