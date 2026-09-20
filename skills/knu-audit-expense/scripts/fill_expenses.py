@@ -104,6 +104,15 @@ def required_text(item: dict, key: str) -> str:
     return value
 
 
+def account_name(item: dict, key: str) -> str:
+    """Return only the account name, even if a code was supplied with it."""
+    value = required_text(item, key)
+    name = re.sub(r"^\d{3,5}\s*[-.:)]?\s*", "", value).strip()
+    if not name:
+        fail(f"{key}에는 코드가 아닌 명칭이 필요합니다: {value!r}")
+    return name
+
+
 def normalize_items(payload: dict) -> list[dict]:
     semester = int(payload.get("semester", 2))
     if semester not in (1, 2):
@@ -119,8 +128,8 @@ def normalize_items(payload: dict) -> list[dict]:
         item = dict(source)
         suffix = receipt_suffix(item, semester)
         payment_date = normalize_date(item.get("payment_date"))
-        category = required_text(item, "category")
-        subcategory = required_text(item, "subcategory")
+        category = account_name(item, "category")
+        subcategory = account_name(item, "subcategory")
         transaction = str(item.get("transaction_id") or f"item-{index}")
         key = (transaction, payment_date, category, subcategory, suffix)
         if key not in groups:
